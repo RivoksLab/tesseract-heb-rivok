@@ -13,7 +13,7 @@ tags:
 
 # heb_rivok: better Hebrew models for Tesseract
 
-**[Article with examples](https://rivoklabs.com/research/tesseract-hebrew)** · [GitHub release](https://github.com/RivoksLab/tesseract-heb-rivok/releases/tag/v1.0) · [Hugging Face](https://huggingface.co/Rivok/tesseract-heb-rivok)
+**[Article with examples](https://rivoklabs.com/research/tesseract-hebrew)** · [GitHub release](https://github.com/RivoksLab/tesseract-heb-rivok/releases/tag/v1.0.1) · [Hugging Face](https://huggingface.co/Rivok/tesseract-heb-rivok)
 
 Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned by
 [Rivok Labs](https://rivoklabs.com) from Google's own Hebrew models:
@@ -22,6 +22,9 @@ Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned by
   `script/Hebrew` (tessdata_best). The more accurate of the two; start here.
 - **`heb_rivok_lite`**: Hebrew and digits, fine-tuned from Google's standard `heb`
   (tessdata_best). Smaller and about three times faster per line; use it with `+eng`.
+
+**Version 1.0.1:** `heb_rivok` now reads pages with columns in the right order, right column
+first; it reads the same text as 1.0 otherwise (see [Changes](#changes)).
 
 On 403 lines cut from real Hebrew documents, Ubuntu's standard Hebrew model gets **4.7%** of
 characters wrong and `heb_rivok` **1.4%**. Each model also beats the Google model it was
@@ -40,21 +43,16 @@ tesseract page.png out -l heb_rivok
 ocrmypdf -l heb_rivok scanned.pdf searchable.pdf
 
 tesseract page.png out -l heb_rivok_lite+eng       # the lite model needs eng for English
-
-# pages with more than one column: either one (see Limits)
-ocrmypdf -l heb+heb_rivok scanned.pdf searchable.pdf
-ocrmypdf -l heb_rivok_lite+eng scanned.pdf searchable.pdf
 ```
 
-- **Pages with more than one column:** use `-l heb+heb_rivok` (Ubuntu's `heb` first) or `heb_rivok_lite`, which does not have this problem. With `-l heb_rivok` alone the columns come out left to right (see Limits).
 - **No `+eng` with `heb_rivok`.** English is already in the model.
 - **Line crops:** use `--psm 13` for crops that hold one line, not `--psm 7` (see Limits).
 
 | file | size | use | SHA-256 |
 |---|---:|---|---|
-| `tessdata/heb_rivok.traineddata` | 5.7 MB | recognition (int8) | `ae48e574583afa82832704d402a17cc496ecfd9d58ef29cc92a124de57d9bda8` |
+| `tessdata/heb_rivok.traineddata` | 5.7 MB | recognition (int8) | `dd9ba506b4ec6e62119a1334949824137692eada686687e51ac10dbb2f7a3df8` |
 | `tessdata/heb_rivok_lite.traineddata` | 3.4 MB | recognition (int8), with `+eng` | `a92584816adf5c9ae38afc255e3530477516318c21c2e711fd57b05535239360` |
-| `tessdata_best/heb_rivok.traineddata` | 12.3 MB | further fine-tuning (float) | `706ad13c68235c1832b7d19ac3925ee3fc105eba2da83181a0f810b9c39c35ce` |
+| `tessdata_best/heb_rivok.traineddata` | 12.3 MB | further fine-tuning (float) | `fcc9c68c83a9a49d555b5e6bdf3232c67878a0def65f77c72cf995ff1ff2c4ce` |
 | `tessdata_best/heb_rivok_lite.traineddata` | 6.0 MB | further fine-tuning (float) | `baceb6c52bf69550ffae52acad9297619a1b7fc8553890caf299798f7348e4cd` |
 
 ## Results
@@ -75,6 +73,7 @@ Debian and Homebrew install. Scores below are for the downloadable int8 `heb_riv
 | GlotOCR-bench Hebrew, "old document" images | 34.0% | **30.1%** |
 | [HaZefira](https://github.com/omilab/historical_press) newspaper, 1874/1887: 4,013 lines | 17.5% | **9.9%** |
 | HaZefira: 34 pages, words found | 67.6% | **81.3%** |
+| HaZefira: 34 pages, words wrong or out of reading order | 47.9% | **32.3%** |
 | 209 lines mixing Hebrew and English | 19.3% | **14.0%** |
 | our 7 example documents (see below) | 4.5% | **1.0%** |
 
@@ -148,13 +147,10 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 
 ## Limits
 
-- **Pages with more than one column: use `-l heb+heb_rivok`, or `heb_rivok_lite`.**
-  - Tesseract decides whether a model reads right to left by counting its characters (`UNICHARSET::major_right_to_left`). `heb_rivok` knows the 52 English letters and only 33 Hebrew characters, so Tesseract lays its pages out left to right, and on a page with columns it reads the left column first. Google's `script/Hebrew`, which it was built from, does the same. Single-column pages (letters, forms, books) are not affected.
-  - Fix 1: list Ubuntu's `heb` first, `-l heb+heb_rivok`. Tesseract takes the page direction from the first model, so the columns come out right to left; for each word it keeps the more confident of the two models' readings.
-  - Fix 2: use `heb_rivok_lite` (`-l heb_rivok_lite+eng`). **It does not have this problem**: it holds Hebrew characters only, so Tesseract lays its pages out right to left.
-  - On the 34 HaZefira pages, counting words in reading order (word error rate, `eval/hazefira.py pages`), `heb_rivok` alone gets 88.5% wrong or out of place, Ubuntu's `heb` 47.9%, `heb+heb_rivok` 37.2% and `heb_rivok_lite+eng` 37.3%. The "words found" scores above do not count order, so they don't show this. The two fixes find 78.9% and 76.6% of the words, against 81.3% for `heb_rivok` alone.
-  - On single-column pages keep `-l heb_rivok`: 3.1% of words wrong on our seven example documents, against 3.6% for `heb+heb_rivok`.
-  - The next version will fix this inside the model. Upstream, tesseract-ocr/tesseract#4629 proposes a setting for it.
+- **Pages with more than one column: fixed in 1.0.1.**
+  - Tesseract decides whether a model reads right to left by counting its characters (`UNICHARSET::major_right_to_left`). `heb_rivok` knows the 52 English letters, and 1.0 had only 33 Hebrew characters, so Tesseract laid its pages out left to right and read the left column first: on the 34 HaZefira pages, 88.5% of words wrong or out of reading order. Google's `script/Hebrew`, which it was built from, does the same.
+  - 1.0.1 adds 23 Hebrew characters the model never outputs (presentation forms; `training/pad_rtl.py`). The network is unchanged and reads the same text, and the columns now come out right to left: 32.3% on the same pages, against 47.9% for Ubuntu's `heb`.
+  - Still on 1.0? Update, or use `-l heb+heb_rivok` or `heb_rivok_lite+eng`. Upstream, tesseract-ocr/tesseract#4629 proposes a setting that would make the padding unnecessary.
 - **Short lines that mix Hebrew and English.**
   - When a line is read on its own (`--psm 7`/`13`), or forms its own paragraph on a page (a heading, a table cell), Tesseract picks its direction from its words, and a tie goes to left-to-right. `הרצאה על Machine Learning` then comes out as `Machine Learning הרצאה על`.
   - This is Tesseract's code (`ResultIterator::CurrentParagraphIsLtr`), not the model, and stock models do the same. Reported upstream as [tesseract-ocr/tesseract#4680](https://github.com/tesseract-ocr/tesseract/issues/4680); `examples/direction/` reproduces it.
@@ -190,6 +186,12 @@ The full recipe and scripts are in `training/` (`training/RECIPE.md`).
   - round 2 fixed the bracket labels and added realistic damage;
   - round 3 restored lines with niqqud (→ `heb_rivok_lite`);
   - round 4 moved to the bigger `script/Hebrew` model with mixed Hebrew/English lines (→ `heb_rivok`).
+  - 1.0.1 padded `heb_rivok`'s character list so Tesseract lays its pages out right to left (`training/pad_rtl.py`, run by `train.sh`).
+
+## Changes
+
+- **1.0.1** (2026-11-07): `heb_rivok` lays pages out right to left, so pages with columns come out in the right order (see Limits). Only its character list changed: 23 Hebrew characters it never outputs were added. The network and the dictionaries are byte-identical to 1.0, and so is the text it reads on every line test (the real-document lines at `--psm 7` and `13`, GlotOCR) and on the 7 example documents. Fine-tuning from the float file runs exactly as from 1.0. `heb_rivok_lite` is unchanged (it was never affected).
+- **1.0** (2026-11-07): first release.
 
 ## Licence and credits
 

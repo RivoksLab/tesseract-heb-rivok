@@ -78,7 +78,7 @@ fonts-dejavu-core fonts-freefont-ttf fonts-liberation`). No font is distributed 
 ```bash
 WORK=$WORK START=$WORK/start/Hebrew.traineddata SEED=4 GEN_ARGS=--mixed \
   WORDS=$WORK/langdata/hebeng.wordlist NUMBERS=$WORK/langdata/hebeng.numbers PUNCS=$WORK/langdata/hebeng.punc \
-  VERSION='heb_rivok 1.0 (2026-11-07, Rivok Labs): tessdata_best script/Hebrew fine-tuned on synthetic Hebrew and Hebrew/English lines' \
+  VERSION='heb_rivok 1.0.1 (2026-11-07, Rivok Labs): tessdata_best script/Hebrew fine-tuned on synthetic Hebrew and Hebrew/English lines; 23 unused Hebrew characters added to the unicharset so Tesseract lays pages out right to left' \
   bash training/train.sh heb_rivok 60000 20000
 ```
 
@@ -112,7 +112,12 @@ lstmtraining --stop_training --continue_from $D/heb_rivok/checkpoints/heb_rivok_
 lstmtraining --stop_training --convert_to_int --continue_from $D/heb_rivok/checkpoints/heb_rivok_checkpoint \
   --traineddata $D/heb_rivok/heb_rivok.traineddata --model_output $WORK/models/tessdata/heb_rivok.traineddata
 
-# 5. version string (no trailing newline), in both files
+# 5. lay pages out right to left: heb_rivok knows the Latin letters, so without this Tesseract
+#    reads multi-column pages left column first (model card, Limits). Network unchanged.
+python3 training/pad_rtl.py $WORK/models/tessdata/heb_rivok.traineddata $WORK/models/tessdata/heb_rivok.traineddata
+python3 training/pad_rtl.py $WORK/models/tessdata_best/heb_rivok.traineddata $WORK/models/tessdata_best/heb_rivok.traineddata
+
+# 6. version string (no trailing newline), in both files
 printf '%s' "$VERSION" > heb_rivok.version
 combine_tessdata -o $WORK/models/tessdata/heb_rivok.traineddata heb_rivok.version
 combine_tessdata -o $WORK/models/tessdata_best/heb_rivok.traineddata heb_rivok.version

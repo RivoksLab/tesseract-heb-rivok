@@ -89,6 +89,13 @@ lstmtraining --stop_training --continue_from "$DATA/$MODEL/checkpoints/${MODEL}_
 lstmtraining --stop_training --convert_to_int --continue_from "$DATA/$MODEL/checkpoints/${MODEL}_checkpoint" \
   --traineddata "$DATA/$MODEL/$MODEL.traineddata" --model_output "$OUT/tessdata/$MODEL.traineddata"
 
+# Tesseract lays a page out right to left only when the unicharset has more right-to-left than
+# left-to-right characters. A model that knows the Latin letters needs padding (model card, Limits);
+# pad_rtl.py leaves a model that is already right-to-left unchanged.
+for d in "$OUT/tessdata_best" "$OUT/tessdata"; do
+  $PYTHON "$HERE/pad_rtl.py" "$d/$MODEL.traineddata" "$d/$MODEL.traineddata"
+done
+
 if [ -n "${VERSION:-}" ]; then
   log "version string: $VERSION"
   for d in "$OUT/tessdata_best" "$OUT/tessdata"; do
