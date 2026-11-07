@@ -62,10 +62,14 @@ a rerun of `hazefira.py` reuses them), `--data-dir` for a local copy of either d
 | GlotOCR-bench, `img_old_document`: mean CER | 34.0% | 32.3% | **30.1%** |
 | HaZefira, 4,013 lines, psm 13: CER | 17.45% | 14.06% | **9.93%** |
 | HaZefira, 34 pages, psm 3: word F1 | 67.6% (`heb+eng`) | | **81.3%** |
+| HaZefira, 34 pages, psm 3: word error rate in reading order | 47.9% (`heb+eng`) | 37.3% (`+eng`) | 88.5% |
+| the same, `-l heb+heb_rivok` | | | **37.2%** (F1 78.9%) |
 
 How each model is run: `heb_rivok` alone (it reads English itself); `heb_rivok_lite` and Ubuntu
 `heb` without `+eng` on GlotOCR and the HaZefira lines; Ubuntu `heb+eng` on the pages, as an
-OCRmyPDF user would run it. The "best stock" column of the model card picks, per row, the best
+OCRmyPDF user would run it. The word error rate in reading order counts words out of place as
+well as wrong, so it shows that `heb_rivok` reads multi-column pages in the wrong column order
+(model card, Limits); word F1 ignores order. The "best stock" column of the model card picks, per row, the best
 of Google's four Hebrew models (tessdata_fast and tessdata_best `heb`, `script/Hebrew` fast and
 best); run them the same way with `--tessdata` pointing at a folder that holds the model.
 

@@ -195,10 +195,12 @@ def pages(a):
     manifest = json.load(open(d / "manifest.json", encoding="utf-8"))
     img = {e["id"]: d / "images" / Path(e["image"]).name for e in manifest}
     res = run_all([e["id"] for e in manifest], lambda k: tesseract(img[k], a, a.psm), a.jobs, a.out)
-    h = nr = np_ = nh = nn = 0
+    h = nr = np_ = nh = nn = we = 0
     for e in manifest:
-        ref = collections.Counter(M.tokens((d / "refs" / Path(e["ref_txt"]).name).read_text(encoding="utf-8")))
-        pred = collections.Counter(M.tokens(res[e["id"]]["pred"]))
+        ref_words = M.tokens((d / "refs" / Path(e["ref_txt"]).name).read_text(encoding="utf-8"))
+        pred_words = M.tokens(res[e["id"]]["pred"])
+        we += M.lev(ref_words, pred_words)          # word edits in reading order: counts column order too
+        ref, pred = collections.Counter(ref_words), collections.Counter(pred_words)
         nref = collections.Counter({w: n for w, n in ref.items() if re.search(r"\d", w)})
         h += sum((ref & pred).values()); nr += sum(ref.values()); np_ += sum(pred.values())
         nh += sum((nref & pred).values()); nn += sum(nref.values())
@@ -206,6 +208,7 @@ def pages(a):
     print(f"HaZefira pages, {a.lang} (psm {a.psm}): {len(manifest)} pages, {nr} reference words")
     print(f"  recall {100 * rec:.1f}%   precision {100 * prec:.1f}%   F1 {100 * 2 * rec * prec / (rec + prec):.1f}%   "
           f"numbers found {100 * nh / max(1, nn):.1f}%")
+    print(f"  word error rate in reading order {100 * we / nr:.1f}%   (F1 ignores order; this counts words out of place)")
 
 
 def main():

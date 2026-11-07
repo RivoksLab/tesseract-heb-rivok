@@ -40,8 +40,11 @@ tesseract page.png out -l heb_rivok
 ocrmypdf -l heb_rivok scanned.pdf searchable.pdf
 
 tesseract page.png out -l heb_rivok_lite+eng       # the lite model needs eng for English
+
+ocrmypdf -l heb+heb_rivok scanned.pdf searchable.pdf   # pages with more than one column
 ```
 
+- **Pages with more than one column:** use `-l heb+heb_rivok` (Ubuntu's `heb` first), or the columns come out left to right (see Limits).
 - **No `+eng` with `heb_rivok`.** English is already in the model.
 - **Line crops:** use `--psm 13` for crops that hold one line, not `--psm 7` (see Limits).
 
@@ -143,9 +146,16 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 
 ## Limits
 
+- **Pages with more than one column: use `-l heb+heb_rivok`.**
+  - Tesseract decides whether a model reads right to left by counting its characters (`UNICHARSET::major_right_to_left`). `heb_rivok` knows the 52 English letters and only 33 Hebrew characters, so Tesseract lays its pages out left to right, and on a page with columns it reads the left column first. Google's `script/Hebrew`, which it was built from, does the same.
+  - Listing Ubuntu's `heb` first (`-l heb+heb_rivok`) restores the right-to-left column order, at a small cost in accuracy.
+  - On the 34 HaZefira pages, counting words in reading order (word error rate, `eval/hazefira.py pages`), `heb_rivok` alone gets 88.5% wrong or out of place, Ubuntu's `heb` 47.9%, `heb+heb_rivok` 37.2%. The "words found" scores above do not count order, so they don't show this. The combination finds 78.9% of the words against 81.3% for `heb_rivok` alone.
+  - Single-column pages (letters, forms, books) are not affected, and there `heb_rivok` alone is slightly better: 3.1% against 3.6% of words wrong on our seven example documents.
+  - `heb_rivok_lite` is not affected (37.3% on the same newspaper pages).
+  - The next version will fix this inside the model. Upstream, tesseract-ocr/tesseract#4629 proposes a setting for it.
 - **Short lines that mix Hebrew and English.**
   - When a line is read on its own (`--psm 7`/`13`), or forms its own paragraph on a page (a heading, a table cell), Tesseract picks its direction from its words, and a tie goes to left-to-right. `הרצאה על Machine Learning` then comes out as `Machine Learning הרצאה על`.
-  - This is Tesseract's code (`ResultIterator::CurrentParagraphIsLtr`), not the model, and stock models do the same. We are reporting it upstream.
+  - This is Tesseract's code (`ResultIterator::CurrentParagraphIsLtr`), not the model, and stock models do the same. Reported upstream as [tesseract-ocr/tesseract#4680](https://github.com/tesseract-ocr/tesseract/issues/4680); `examples/direction/` reproduces it.
   - On 209 real mixed lines (`--psm 7`), `heb_rivok` scores 14.2% as Tesseract orders the words, and 4.9% with the same words put back in right-to-left order.
   - Long paragraphs are not affected.
 - **Many mixed lines? Try [paddleocr-hebrew](https://github.com/RivoksLab/paddleocr-hebrew).**
