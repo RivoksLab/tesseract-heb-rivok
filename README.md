@@ -13,6 +13,8 @@ tags:
 
 # heb_rivok: better Hebrew models for Tesseract
 
+**[Article with examples](https://rivoklabs.com/research/tesseract-hebrew)** · [GitHub release](https://github.com/RivoksLab/tesseract-heb-rivok/releases/tag/v1.0) · [Hugging Face](https://huggingface.co/Rivok/tesseract-heb-rivok)
+
 Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned by
 [Rivok Labs](https://rivoklabs.com) from Google's own Hebrew models:
 
@@ -124,7 +126,8 @@ gershayim ״, plus en dash, bullet and €.
 
 ## Examples
 
-`examples/` regenerates these example pages:
+See them line by line, with errors marked, in the
+[article](https://rivoklabs.com/research/tesseract-hebrew#examples); `examples/` regenerates them:
 whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 
 | page | Ubuntu `heb` | heb_rivok |
