@@ -1,0 +1,63 @@
+# Fonts used to render the training lines of heb_rivok and heb_rivok_lite (50 fonts).
+# The order matters: gen_lines.py picks fonts by position (the original run listed the
+# Google Fonts folder sorted by file name, then the system fonts), so keep it as it is.
+# Weight: display faces (Amatic, Karantina, Bellefair, Secular, Suez, Rubik Mono, Rashi) are
+# drawn 1/4 as often as the others (gen_lines.DISPLAY).
+# No font file is distributed here. fetch_fonts.sh downloads the Google Fonts files from the
+# google/fonts repository at the commit given in each URL, saves each under the name in the
+# first column (several are renamed; some files are used twice under two names, as in the
+# original run), copies the system fonts from their Debian/Ubuntu packages, and checks every
+# file against the sha256 column. Identical files give identical training images; other
+# versions give slightly different images.
+#
+# file	family	licence	sha256	source
+Alef-Bold.ttf	Alef	OFL-1.1 (per google/fonts; the file names no licence)	5dae0d7b2365288d8a34f5fb033d4278be96cef2547862cb93ceb8373e10bcf1	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/alef/Alef-Bold.ttf
+Alef-Regular.ttf	Alef	OFL-1.1 (per google/fonts; the file names no licence)	a32adcc953ac356906901778460083dc207d4560cb586fd9ea24ec5b186969ed	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/alef/Alef-Regular.ttf
+AmaticSC-Bold.ttf	Amatic SC	OFL-1.1	d367beadee66efbb657d24d3d8f30f3b60633e9d5c8ded7385541cf775cabb4d	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/amaticsc/AmaticSC-Bold.ttf
+AmaticSC-Regular.ttf	Amatic SC	OFL-1.1	513a76f96d39a5366bd27c258674aaea35ee51c42b8f3060387f74649ee8c8aa	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/amaticsc/AmaticSC-Regular.ttf
+Arimo-Italic-Variable.ttf	Arimo	OFL-1.1	bd248f69d254987da54bdfe18d229c668a6734f5f098c5dbfd5873553935b89b	https://raw.githubusercontent.com/google/fonts/1e60286901f00f9b68eeb7ef2a202c912e0b08ae/ofl/arimo/Arimo-Italic%5Bwght%5D.ttf
+Arimo-Variable.ttf	Arimo	OFL-1.1	c75270dfa8b5747c666d9e1915b8c9a6cb6e2de74d103cd0f6ee0104675a3604	https://raw.githubusercontent.com/google/fonts/1e60286901f00f9b68eeb7ef2a202c912e0b08ae/ofl/arimo/Arimo%5Bwght%5D.ttf
+Assistant-Regular.ttf	Assistant	OFL-1.1	1c3b393884f8fb133a1b17f41d26178adae1050a4f86d7a429d1b5658c314fa3	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/assistant/Assistant%5Bwght%5D.ttf
+Assistant[wght].ttf	Assistant	OFL-1.1	1c3b393884f8fb133a1b17f41d26178adae1050a4f86d7a429d1b5658c314fa3	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/assistant/Assistant%5Bwght%5D.ttf
+Bellefair-Regular.ttf	Bellefair	OFL-1.1	5c0cd4d526e6dfcb189106af6b5e6ec99a54efb6d458dfd61626ce6dc0f03026	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/bellefair/Bellefair-Regular.ttf
+Cousine-Bold.ttf	Cousine	Apache-2.0	42d14baaf1802f8edf7659346a8574b41c4c78e264eb81cdb0891ca6686354ce	https://raw.githubusercontent.com/google/fonts/b8df7813875fe214d7980c4ba03094077b859f8e/apache/cousine/Cousine-Bold.ttf
+Cousine-BoldItalic.ttf	Cousine	Apache-2.0	ef65b8624e7993977feb9f9ba18f514a1fa9adc4e1c4737c8839574685c188ae	https://raw.githubusercontent.com/google/fonts/b8df7813875fe214d7980c4ba03094077b859f8e/apache/cousine/Cousine-BoldItalic.ttf
+Cousine-Italic.ttf	Cousine	Apache-2.0	9b2b98e5d389fe74968af2abb440ac4b6fcd24e2a1aba5ed895b0337b6b0b5e6	https://raw.githubusercontent.com/google/fonts/b8df7813875fe214d7980c4ba03094077b859f8e/apache/cousine/Cousine-Italic.ttf
+Cousine-Regular.ttf	Cousine	Apache-2.0	69e1ea59eb770014204e5174f805750f9a793db4a2531e6516b30b7460d470b3	https://raw.githubusercontent.com/google/fonts/b8df7813875fe214d7980c4ba03094077b859f8e/apache/cousine/Cousine-Regular.ttf
+DavidLibre-Bold.ttf	David Libre	OFL-1.1	7610819c7888c8e7ecdfc573089113ec5355cf95078614ae0e30b509b05468f8	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/davidlibre/DavidLibre-Bold.ttf
+DavidLibre-Medium.ttf	David Libre	OFL-1.1	fa3e35197472768520a489b77009b75bfc55601f61a0c4d0c1b23ca7f87701ce	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/davidlibre/DavidLibre-Medium.ttf
+DavidLibre-Regular.ttf	David Libre	OFL-1.1	923f06e0f6dc84e1649d8cc5d5e12a8d663adf6aba83ba15baa5d559fb47b86e	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/davidlibre/DavidLibre-Regular.ttf
+FrankRuhlLibre-Regular.ttf	Frank Ruhl Libre	OFL-1.1	f9bf26966681037aae894b031bd0dcf2c1bfdfa128dd0640cf276fe62a338a43	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/frankruhllibre/FrankRuhlLibre%5Bwght%5D.ttf
+FrankRuhlLibre[wght].ttf	Frank Ruhl Libre	OFL-1.1	f9bf26966681037aae894b031bd0dcf2c1bfdfa128dd0640cf276fe62a338a43	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/frankruhllibre/FrankRuhlLibre%5Bwght%5D.ttf
+Heebo-Regular.ttf	Heebo	OFL-1.1	18f930b583fa8fe6b40b2f8263b7ac6afbac07adc91a12467874e7467d3ace30	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/heebo/Heebo%5Bwght%5D.ttf
+Heebo[wght].ttf	Heebo	OFL-1.1	18f930b583fa8fe6b40b2f8263b7ac6afbac07adc91a12467874e7467d3ace30	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/heebo/Heebo%5Bwght%5D.ttf
+Karantina-Bold.ttf	Karantina	OFL-1.1	fc099ee72a843fb5b4d574abd099e047eec4cf476a1a2c65fe520e1cdcc897be	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/karantina/Karantina-Bold.ttf
+Karantina-Light.ttf	Karantina	OFL-1.1	3286ffc39003621874ad2ac2d6ca9374d2728443465c4df6222dff425814560d	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/karantina/Karantina-Light.ttf
+Karantina-Regular.ttf	Karantina	OFL-1.1	a1ef8ee51724f0182f07d060b63047540a0bca96db10d33fa6a0b539f99019bf	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/karantina/Karantina-Regular.ttf
+MiriamLibre-Regular.ttf	Miriam Libre	OFL-1.1	9ea850118d552d25e1fb8242cbd429a5801c691b6ce218458e1a039045114bb8	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/miriamlibre/MiriamLibre%5Bwght%5D.ttf
+MiriamLibre[wght].ttf	Miriam Libre	OFL-1.1	9ea850118d552d25e1fb8242cbd429a5801c691b6ce218458e1a039045114bb8	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/miriamlibre/MiriamLibre%5Bwght%5D.ttf
+Noto-Rashi-Hebrew-Variable.ttf	Noto Rashi Hebrew	OFL-1.1	4da0058f46aa66f9a334967a640a1e56abb642eba3c1c3fc5080f6282c9eb126	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/notorashihebrew/NotoRashiHebrew%5Bwght%5D.ttf
+NotoSansHebrew-Regular.ttf	Noto Sans Hebrew	OFL-1.1	7ef36a2c3593758cdb622e1bdef4f84523e92fbc3ccc667438dd80ff54c2de88	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/notosanshebrew/NotoSansHebrew%5Bwdth%2Cwght%5D.ttf
+NotoSansHebrew[wdth,wght].ttf	Noto Sans Hebrew	OFL-1.1	7ef36a2c3593758cdb622e1bdef4f84523e92fbc3ccc667438dd80ff54c2de88	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/notosanshebrew/NotoSansHebrew%5Bwdth%2Cwght%5D.ttf
+NotoSerifHebrew[wdth,wght].ttf	Noto Serif Hebrew	OFL-1.1	93caef921360788dc3b0e32136bb26f16bc57717ec482d48fc7fd43820617165	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/notoserifhebrew/NotoSerifHebrew%5Bwdth%2Cwght%5D.ttf
+Open-Sans-Italic-Variable.ttf	Open Sans	OFL-1.1	fe269381e992f32e135801740998544d6235061e37c93ec067ad2be3edd5b17b	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/opensans/OpenSans-Italic%5Bwdth%2Cwght%5D.ttf
+Open-Sans-Variable.ttf	Open Sans	OFL-1.1	36643644f318a812aab2d2ed3bb98f8cf0872527f835fe9398d95fe6b9adb878	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/opensans/OpenSans%5Bwdth%2Cwght%5D.ttf
+Rubik-Italic.ttf	Rubik	OFL-1.1	08c6c4018a5ada8b517407b46897e46cf6ebb106853fbd3e89addb51d3b59c62	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/rubik/Rubik-Italic%5Bwght%5D.ttf
+Rubik-Mono-One-Regular.ttf	Rubik Mono One	OFL-1.1	b22624b6a36e543e942106edfccd198c50b57b65b924bfe02a6f0a5699429e6b	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/rubikmonoone/RubikMonoOne-Regular.ttf
+Rubik-Regular.ttf	Rubik	OFL-1.1	1b3a7437ba2af80e465e773ed60c5036d1ba6ace492d89046dbcf18fb31e4e88	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/rubik/Rubik%5Bwght%5D.ttf
+Rubik[wght].ttf	Rubik	OFL-1.1	1b3a7437ba2af80e465e773ed60c5036d1ba6ace492d89046dbcf18fb31e4e88	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/rubik/Rubik%5Bwght%5D.ttf
+SecularOne-Regular.ttf	Secular One	OFL-1.1	2f45092a521db5042887941edfef73178ed7c5ba7fdfc5b6f581d44aab7b0234	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/secularone/SecularOne-Regular.ttf
+SuezOne-Regular.ttf	Suez One	OFL-1.1	3ef86844aad0cf9db7dcbda326f3d2f54cc4ccfe56db949e9e0c60a17031bd41	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/suezone/SuezOne-Regular.ttf
+Tinos-Bold.ttf	Tinos	Apache-2.0	6a0afe87068ba5ddeb6a9bb7b9d0dc41666966c044767df69de3efb7e33f5af8	https://raw.githubusercontent.com/google/fonts/8f9756108bfbbdf625e24e6b869ed02465b2a7af/apache/tinos/Tinos-Bold.ttf
+Tinos-BoldItalic.ttf	Tinos	Apache-2.0	52c4d87a988eb1f1c25e1fcb97970d456a2fb252e0fa2116e2b4bb33e7824bda	https://raw.githubusercontent.com/google/fonts/8f9756108bfbbdf625e24e6b869ed02465b2a7af/apache/tinos/Tinos-BoldItalic.ttf
+Tinos-Italic.ttf	Tinos	Apache-2.0	751c979043c9641dad389ab9c680c2c9ffb0a0c7352153f48b9ebd958e8963d8	https://raw.githubusercontent.com/google/fonts/8f9756108bfbbdf625e24e6b869ed02465b2a7af/apache/tinos/Tinos-Italic.ttf
+Tinos-Regular.ttf	Tinos	Apache-2.0	1061395ac6775f3cea27dc9ef3d7a3b9cc34c2b4a2d97aa649411294d5165990	https://raw.githubusercontent.com/google/fonts/8f9756108bfbbdf625e24e6b869ed02465b2a7af/apache/tinos/Tinos-Regular.ttf
+VarelaRound-Regular.ttf	Varela Round	OFL-1.1	e1e47eb66dbc2ddc106661338e712d9176c9e83c669a82fde155324823d03aa2	https://raw.githubusercontent.com/google/fonts/86aced91de05cd4f96a06838124cca45be337b2b/ofl/varelaround/VarelaRound-Regular.ttf
+DejaVuSans.ttf	DejaVu Sans	Bitstream Vera + DejaVu licence (free)	b4c632e3cdf9acc7f28758fb5a323c8524d7fc6660d46904d9b6cbe2809c419c	/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf (Debian/Ubuntu package fonts-dejavu-core 2.37)
+FreeSans.ttf	FreeSans	GPL-3.0-or-later with font exception	fd3cf5f7a88bb469fd0936ce6152509b60b817711b07d19abcb69e6c744b08ca	/usr/share/fonts/truetype/freefont/FreeSans.ttf (Debian/Ubuntu package fonts-freefont-ttf 20211204+svn4273)
+FreeSerif.ttf	FreeSerif	GPL-3.0-or-later with font exception	55ec3a32b3b94995bc6063e5ff5cbe4d27cfd7b1991b53f01428a9547076c843	/usr/share/fonts/truetype/freefont/FreeSerif.ttf (Debian/Ubuntu package fonts-freefont-ttf 20211204+svn4273)
+FreeMono.ttf	FreeMono	GPL-3.0-or-later with font exception	5d8c9689e6108a04da659f98631faf577aa630ccac204137575d948207137684	/usr/share/fonts/truetype/freefont/FreeMono.ttf (Debian/Ubuntu package fonts-freefont-ttf 20211204+svn4273)
+LiberationSans-Regular.ttf	Liberation Sans	OFL-1.1	075e71be4c58beda172ecb574a799308f04c3d054c6a5b7434954d3b0f1b28d8	/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf (Debian/Ubuntu package fonts-liberation 2.1.5)
+LiberationSerif-Regular.ttf	Liberation Serif	OFL-1.1	350f4ffd773cae53560c63dca3d89a5070595614fde12f772bf43feb63d81064	/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf (Debian/Ubuntu package fonts-liberation 2.1.5)
+LiberationMono-Regular.ttf	Liberation Mono	OFL-1.1	d18235f1e874771f4eaec3ddd6ddb4db849d334bdc6930c5c2185d9344834e62	/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf (Debian/Ubuntu package fonts-liberation 2.1.5)
+LiberationSans-Bold.ttf	Liberation Sans	OFL-1.1	b72c65e551d653b54217ffad0d1454ce0657e4e8d4a28bcc79e0acd2598f4bf3	/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf (Debian/Ubuntu package fonts-liberation 2.1.5)

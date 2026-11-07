@@ -1,0 +1,18 @@
+heb_rivok and heb_rivok_lite, Hebrew models for Tesseract OCR
+Copyright 2026 Rivok Labs
+
+heb_rivok is a fine-tuned derivative of the tessdata_best "script/Hebrew" model, and
+heb_rivok_lite of the tessdata_best "heb" model (https://github.com/tesseract-ocr/tessdata_best),
+Copyright Google, licensed under the Apache License, Version 2.0.
+
+Their training text includes the Hebrew and English training text and word lists of
+tesseract-ocr/langdata_lstm (https://github.com/tesseract-ocr/langdata_lstm), licensed under
+the Apache License, Version 2.0.
+
+Training images were rendered with fonts under the SIL Open Font License 1.1 (Google Fonts
+Hebrew families, Liberation), the GNU FreeFont licence and the DejaVu fonts licence. No font is
+distributed with these models.
+
+The example pages in examples/ use public-domain scans from Wikimedia Commons (National Library
+of Israel) with reference text from Hebrew Wikisource (CC BY-SA 4.0). Examples are generated
+locally by the scripts and not distributed in this repository.

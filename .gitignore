@@ -1,0 +1,15 @@
+# Generated example images and results
+examples/out/
+
+# Downloaded benchmark data, predictions and stock models: never commit
+# (HaZefira states no licence; GlotOCR-bench is evaluation-only)
+eval/data/
+eval/results/
+eval/models/
+
+# Training work folders, if placed inside the repository
+work/
+training/work/
+
+__pycache__/
+*.pyc
