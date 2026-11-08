@@ -1,0 +1,8 @@
+# filled by build.sh from ../tessdata, ../LICENSE and ../NOTICE
+src/tesseract_heb_rivok/tessdata/
+/LICENSE
+/NOTICE
+dist/
+build/
+*.egg-info/
+__pycache__/
