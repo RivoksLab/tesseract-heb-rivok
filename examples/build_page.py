@@ -18,13 +18,13 @@ BASE, OURS = ("ubuntu_heb", "Ubuntu heb"), ("heb_rivok", "heb_rivok")
 SHOW = ["bank", "rental", "masa_baarav_1922_p4", "bostenay_1872_p42"]   # tab order
 MAX_SHOWN = 5   # lines shown per page: heb_rivok at most 1 error, biggest gap over Ubuntu heb first
 NOTES = {
-    "invoice": "Text we wrote, set in IBM Plex Sans Hebrew, a font the model never saw in training, "
+    "invoice": "Text we wrote, set in IBM Plex Sans Hebrew, "
                "damaged like an office scan: 200 dpi, slight tilt, noise, JPEG.",
-    "notice": "Text we wrote, set in Bona Nova, a font the model never saw in training, damaged like a "
+    "notice": "Text we wrote, set in Bona Nova, damaged like a "
               "worn photocopy: detail lost, then thresholded, with specks.",
-    "bank": "Text we wrote, set in Miriam CLM, a font the model never saw in training, sent through a "
+    "bank": "Text we wrote, set in Miriam CLM, sent through a "
             "simulated fax: half the vertical resolution, pure black and white.",
-    "rental": "Text we wrote, set in Frank Ruehl CLM, a font the model never saw in training, damaged "
+    "rental": "Text we wrote, set in Frank Ruehl CLM, damaged "
               "like a worn photocopy.",
     "medical": "Text we wrote, set in Simple CLM, damaged like an office scan.",
     "water": "Text we wrote, set in Nachlieli CLM, damaged like a phone photo.",
