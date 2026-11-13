@@ -201,3 +201,4 @@ The full recipe and scripts are in `training/` (`training/RECIPE.md`).
 - **Based on:** Google's tessdata_best `script/Hebrew` and `heb`, and the langdata_lstm training text, all Apache-2.0 (see `NOTICE`).
 - **Fonts:** used only to render training images; no font is distributed here.
 - **Made by:** Rivok Labs. Contact: ronen@rivoklabs.com
+- **Credit:** If you use it, a credit or a link back to this repository is appreciated.
