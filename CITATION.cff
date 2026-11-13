@@ -8,8 +8,8 @@ authors:
 repository-code: "https://github.com/RivoksLab/tesseract-heb-rivok"
 url: "https://huggingface.co/Rivok/tesseract-heb-rivok"
 license: Apache-2.0
-version: "1.0.1"
-date-released: "2026-11-07"
+version: "2.0"
+date-released: "2026-11-13"
 keywords:
   - Hebrew
   - OCR
@@ -18,6 +18,6 @@ keywords:
   - LSTM
   - right-to-left
 abstract: >-
-  Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned from Google's tessdata_best
-  models: heb_rivok (Hebrew, English and digits, from script/Hebrew) and heb_rivok_lite
-  (Hebrew and digits, from heb).
+  Two drop-in Tesseract 5 models for printed Hebrew, including old print and niqqud, fine-tuned
+  from Google's tessdata_best models: heb_rivok (Hebrew, English and digits, from script/Hebrew)
+  and heb_rivok_lite (Hebrew and digits, from heb).

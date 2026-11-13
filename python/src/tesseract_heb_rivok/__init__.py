@@ -19,12 +19,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-__version__ = "1.0.1"
+__version__ = "2.0.0"
 
 #: Model name -> (model version, SHA-256 of the shipped integer ("fast") file).
 MODELS = {
-    "heb_rivok": ("1.0.1", "dd9ba506b4ec6e62119a1334949824137692eada686687e51ac10dbb2f7a3df8"),
-    "heb_rivok_lite": ("1.0", "a92584816adf5c9ae38afc255e3530477516318c21c2e711fd57b05535239360"),
+    "heb_rivok": ("2.0", "09ef1830f3393c590791abf9c18deca14450c8e5d3b556249d63b0183cf7a426"),
+    "heb_rivok_lite": ("2.0", "59da073ad0bca9449fa5a965996e49d0e2bee3c17e8b0b4e2769d67a7ce34c40"),
 }
 
 _HERE = Path(__file__).resolve().parent

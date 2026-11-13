@@ -56,13 +56,17 @@ a rerun of `hazefira.py` reuses them), `--data-dir` for a local copy of either d
 
 ## Expected results (int8 files, Tesseract 5.5.0)
 
-| test | Ubuntu `heb` | heb_rivok_lite | **heb_rivok** |
+| test | Ubuntu `heb` | heb_rivok_lite 2.0 | **heb_rivok 2.0** |
 |---|---:|---:|---:|
-| GlotOCR-bench, `img_plain`: mean CER | 21.2% | 20.6% | **18.5%** |
-| GlotOCR-bench, `img_old_document`: mean CER | 34.0% | 32.3% | **30.1%** |
-| HaZefira, 4,013 lines, psm 13: CER | 17.45% | 14.06% | **9.93%** |
-| HaZefira, 34 pages, psm 3: word F1 | 67.6% (`heb+eng`) | | **81.3%** |
-| HaZefira, 34 pages, psm 3: word error rate in reading order | 47.9% (`heb+eng`) | 37.3% (`+eng`) | **32.3%** (1.0: 88.5%) |
+| GlotOCR-bench, `img_plain`: mean CER | 21.2% | 13.2% | **10.9%** |
+| GlotOCR-bench, `img_old_document`: mean CER | 34.0% | 27.8% | **25.0%** |
+| HaZefira, 4,013 lines, psm 13: CER | 17.45% | 6.34% | **4.83%** |
+| HaZefira, 34 pages, psm 3: word F1 | 67.6% (`heb+eng`) | 91.0% (`+eng`) | **92.1%** |
+| HaZefira, 34 pages, psm 3: word error rate in reading order | 47.9% (`heb+eng`) | 22.9% (`+eng`) | **21.7%** |
+
+1.0 / 1.0.1 for comparison: GlotOCR 18.5% / 30.1% (`heb_rivok`) and 20.6% / 32.3% (lite); HaZefira
+lines 9.93% and 14.06%; pages word F1 81.3% (`heb_rivok`), word error rate in reading order 32.3%
+(`heb_rivok`; 1.0: 88.5%) and 37.3% (lite).
 
 How each model is run: `heb_rivok` alone (it reads English itself); `heb_rivok_lite` and Ubuntu
 `heb` without `+eng` on GlotOCR and the HaZefira lines; Ubuntu `heb+eng` on the pages, as an
