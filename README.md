@@ -23,6 +23,8 @@ Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned by
 - **`heb_rivok_lite`**: Hebrew and digits, fine-tuned from Google's standard `heb`
   (tessdata_best). Smaller and about three times faster per line; use it with `+eng`.
 
+Using `heb_rivok` in a project or product? We'd love to hear about it: [ronen@rivoklabs.com](mailto:ronen@rivoklabs.com).
+
 **Version 1.0.1:** `heb_rivok` now reads pages with columns in the right order, right column
 first; it reads the same text as 1.0 otherwise (see [Changes](#changes)).
 
