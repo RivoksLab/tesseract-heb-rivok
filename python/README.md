@@ -71,15 +71,21 @@ opts.ocr_options = TesseractCliOcrOptions(lang=["heb_rivok"], path=tessdata, mod
 
 ## Results
 
-Character error rate, lower is better; `fast` models, Tesseract 5.5.0.
+Character error rate, lower is better; Tesseract 5.5.0. Each model against the Google tessdata_best
+model it was fine-tuned from; this package installs our int8 files. The last column is Ubuntu's `heb`,
+what most people have installed: Google's tessdata_fast model, a smaller, separately trained network,
+not an int8 copy of tessdata_best.
 
-| test | `heb` (Ubuntu/Debian) | heb_rivok_lite | **heb_rivok** |
-|---|---:|---:|---:|
-| 150 line crops from real Hebrew documents | 4.7% | 1.7% | **1.2%** |
-| Four old books (1872–1922), 1,087 lines | 11.3% | 4.8% | **2.7%** |
-| … the vowelled Selichot 1885: vowel marks read (higher is better) | 23% | 61% | **82%** |
-| [GlotOCR-bench](https://huggingface.co/datasets/cis-lmu/GlotOCR-bench) Hebrew, clean images | 21.2% | 13.2% | **10.9%** |
-| [HaZefira](https://github.com/omilab/historical_press) newspaper, 4,013 line crops | 17.5% | 6.3% | **4.8%** |
+| test | Google `script/Hebrew` (tessdata_best, float) | **heb_rivok** (int8) | Google `heb` (tessdata_best, float) | **heb_rivok_lite** (int8) | Ubuntu `heb` (tessdata_fast) |
+|---|---:|---:|---:|---:|---:|
+| 150 line crops from real Hebrew documents | 4.0% | **1.2%** | 4.0% | **1.7%** | 4.7% |
+| Four old books (1872–1922), 1,087 lines | 7.8% | **2.7%** | 11.2% | **4.8%** | 11.3% |
+| … the vowelled Selichot 1885: vowel marks read (higher is better) | 56% | **82%** | 17% | **61%** | 23% |
+| [GlotOCR-bench](https://huggingface.co/datasets/cis-lmu/GlotOCR-bench) Hebrew, clean images | 20.7% | **10.9%** | 24.6% | **13.2%** | 21.2% |
+| [HaZefira](https://github.com/omilab/historical_press) newspaper, 4,013 line crops | 14.3% | **4.8%** | 17.7% | **6.3%** | 17.5% |
+
+Google's `heb` can output only 6 vowel marks (shva, hiriq, segol, patah, qamats, dagesh), so most of
+the lite model's vowel gain is marks it cannot write at all, not marks it misreads.
 
 Method, more tests and how the models were trained are in the
 [model card](https://github.com/RivoksLab/tesseract-heb-rivok#readme). The 150 crops come

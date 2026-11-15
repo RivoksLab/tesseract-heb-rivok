@@ -26,10 +26,12 @@ Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned by
 
 Using `heb_rivok` in a project or product? We'd love to hear about it: [ronen@rivoklabs.com](mailto:ronen@rivoklabs.com).
 
-**Version 2.0** reads old print and vowelled text (niqqud) far better than 1.0, and modern documents as
-well as before. On 1,087 lines from four Hebrew books printed between 1872 and 1922, Ubuntu's standard
-Hebrew model gets **11.3%** of characters wrong, 1.0 **8.1%** and 2.0 **2.7%**. On a vowelled 1885
-prayer book it keeps **82%** of the vowel marks, against 23% for Ubuntu's model. See [Changes](#changes).
+**Version 2.0** reads old print and vowelled text (niqqud) far better than the Google models it was
+fine-tuned from, and modern documents better too. On 1,087 lines from four Hebrew books printed between
+1872 and 1922, Google's `script/Hebrew` (tessdata_best) gets **7.8%** of characters wrong and
+`heb_rivok` 2.0 **2.6%** (its int8 file 2.7%). On a vowelled 1885 prayer book it reads **82%** of the
+vowel marks, against 56%. Ubuntu's `heb`, the smaller model most people have installed, gets 11.3% and
+23%. See [Results](#results) and [Changes](#changes).
 
 Each model is one file: no new software, and it works wherever Tesseract does, OCRmyPDF and
 Paperless-ngx included.
@@ -69,24 +71,50 @@ per line. Use either with `-l heb_rivok`; put the one you want in your tessdata 
 Character error rate (CER: the share of characters read wrong, missed or added; lower is
 better) unless marked. "Words found" is word F1 against the page's own text; higher is better.
 
-Almost everyone running Tesseract on Hebrew uses Google's small "fast" `heb`, the file Ubuntu,
-Debian and Homebrew install. `script/Hebrew` (tessdata_best) is Google's biggest Hebrew model and the
-one `heb_rivok` was fine-tuned from. Our columns are the downloadable int8 files.
+Each model is compared with the Google tessdata_best model it was fine-tuned from, float against
+float, with our int8 file (`tessdata/`, the one for everyday use) next to it. The last column is
+Ubuntu's `heb`, what most people have installed today (Ubuntu, Debian, Homebrew): Google's
+tessdata_fast model, a smaller, separately trained network (last layer 128 units against 192 in
+tessdata_best `heb`), not an int8 copy of tessdata_best.
 
-| test | Ubuntu `heb` | Google `script/Hebrew` | heb_rivok 1.0 | **heb_rivok 2.0** | heb_rivok_lite 2.0 |
-|---|---:|---:|---:|---:|---:|
-| 150 lines from real documents, Hebrew only | 4.7% | 4.0% | 1.4% | **1.2%** | 1.7% |
-| 253 lines from real documents, with numbers | 4.5% | 3.5% | 1.6% | **1.6%** | 1.5% |
-| Four old books (1872–1922): 1,087 lines | 11.3% | 7.8% | 8.1% | **2.7%** | 4.8% |
-| … the vowelled Selichot 1885: vowel marks read (higher is better) | 23% | 56% | 50% | **82%** | 61% |
-| [GlotOCR-bench](https://huggingface.co/datasets/cis-lmu/GlotOCR-bench) Hebrew, clean images (many with niqqud) | 21.2% | 20.7% | 18.5% | **10.9%** | 13.2% |
-| GlotOCR-bench Hebrew, "old document" images | 34.0% | 31.8% | 30.1% | **25.0%** | 27.8% |
-| [HaZefira](https://github.com/omilab/historical_press) newspaper, 1874/1887: 4,013 lines | 17.5% | 14.3% | 9.9% | **4.8%** | 6.3% |
-| HaZefira: 34 pages, words found (higher is better) | 67.6% | 75.5% | 81.3% | **92.1%** | 91.0% |
-| 209 lines mixing Hebrew and English | 19.3% | 16.4% | 14.0% | **14.3%** | 15.1% |
+**`heb_rivok` 2.0**, fine-tuned from `script/Hebrew`:
 
-Ubuntu `heb` and the lite model run with `+eng` on pages and mixed lines. On unvowelled old print the
-lite model is close to `heb_rivok`; on vowelled text `heb_rivok` stays well ahead.
+| test | Google `script/Hebrew` (tessdata_best, float) | **heb_rivok 2.0 (float)** | heb_rivok 2.0 (int8) | Ubuntu `heb` (tessdata_fast) |
+|---|---:|---:|---:|---:|
+| 150 lines from real documents, Hebrew only | 4.0% | **1.2%** | 1.2% | 4.7% |
+| 253 lines from real documents, with numbers | 3.5% | **1.6%** | 1.6% | 4.5% |
+| Four old books (1872–1922): 1,087 lines | 7.8% | **2.6%** | 2.7% | 11.3% |
+| … the vowelled Selichot 1885: vowel marks read (higher is better) | 56% | **82%** | 82% | 23% |
+| [GlotOCR-bench](https://huggingface.co/datasets/cis-lmu/GlotOCR-bench) Hebrew, clean images (many with niqqud) | 20.7% | **11.0%** | 10.9% | 21.2% |
+| GlotOCR-bench Hebrew, "old document" images | 31.8% | **24.5%** | 25.0% | 34.0% |
+| [HaZefira](https://github.com/omilab/historical_press) newspaper, 1874/1887: 4,013 lines | 14.3% | **4.8%** | 4.8% | 17.5% |
+| HaZefira: 34 pages, words found (higher is better) | 75.5% | **92.2%** | 92.1% | 67.6% |
+| 209 lines mixing Hebrew and English | 16.4% | **14.4%** | 14.3% | 19.3% |
+
+**`heb_rivok_lite` 2.0**, fine-tuned from `heb`:
+
+| test | Google `heb` (tessdata_best, float) | **heb_rivok_lite 2.0 (float)** | heb_rivok_lite 2.0 (int8) | Ubuntu `heb` (tessdata_fast) |
+|---|---:|---:|---:|---:|
+| 150 lines from real documents, Hebrew only | 4.0% | **1.7%** | 1.7% | 4.7% |
+| 253 lines from real documents, with numbers | 4.3% | **1.5%** | 1.5% | 4.5% |
+| Four old books (1872–1922): 1,087 lines | 11.2% | **4.7%** | 4.8% | 11.3% |
+| … the vowelled Selichot 1885: vowel marks read (higher is better) | 17% | **61%** | 61% | 23% |
+| GlotOCR-bench Hebrew, clean images | 24.6% | **13.7%** | 13.2% | 21.2% |
+| GlotOCR-bench Hebrew, "old document" images | 33.5% | **27.4%** | 27.8% | 34.0% |
+| HaZefira newspaper: 4,013 lines | 17.7% | **6.4%** | 6.3% | 17.5% |
+| HaZefira: 34 pages, words found (higher is better) | 69.7% | **91.0%** | 91.0% | 67.6% |
+| 209 lines mixing Hebrew and English | 19.8% | **14.7%** | 15.1% | 19.3% |
+
+- **`+eng`:** `heb`, `heb_rivok_lite` and Ubuntu `heb` run with `+eng` on pages and mixed lines;
+  `script/Hebrew` and `heb_rivok` include English and run alone.
+- **Float or int8:** the two files of each model are within half a point of each other on every test.
+- **Vowels:** Google's `heb` can output only 6 of the marks (shva, hiriq, segol, patah, qamats,
+  dagesh), so on vowelled text the lite model's gain is mostly marks the start model cannot write at
+  all. On unvowelled old print the lite model is close to `heb_rivok`; on vowelled text `heb_rivok`
+  stays well ahead.
+- **Not the word list:** `heb_rivok_lite`'s built-in word list is larger than Google's `heb`. With
+  every model's word list removed, the gaps stay as large (lite against `heb` on real document lines
+  1.7% against 4.1%, on the old books 4.9% against 11.0%).
 
 ### Vowels (niqqud) in detail
 
@@ -95,12 +123,15 @@ vowel marks each model reads (and, of the marks it outputs, the share that are r
 
 | model | marks read | marks right | words exact, vowels included |
 |---|---:|---:|---:|
-| Ubuntu `heb` | 30% | 56% | 5% |
-| Google `script/Hebrew` (best) | 62% | 74% | 22% |
-| heb_rivok 1.0 | 60% | 77% | 29% |
-| **heb_rivok_lite 2.0** | **73%** | **86%** | **49%** |
-| **heb_rivok 2.0** | **85%** | **92%** | **66%** |
-| heb_rivok 2.0, float | 88% | 93% | 69% |
+| Ubuntu `heb` (tessdata_fast) | 30% | 56% | 5% |
+| Google `heb` (tessdata_best, float) | 21% | 55% | 3% |
+| Google `script/Hebrew` (tessdata_best, float) | 62% | 74% | 22% |
+| heb_rivok 1.0 (int8) | 60% | 77% | 29% |
+| **heb_rivok_lite 2.0** (float / int8) | **73%** / 73% | **86%** / 86% | **50%** / 49% |
+| **heb_rivok 2.0** (float / int8) | **88%** / 85% | **93%** / 92% | **69%** / 66% |
+
+Google's `heb` can output only 6 of these marks (shva, hiriq, segol, patah, qamats, dagesh), so most of
+its gap to the lite model is marks it cannot write at all, not misreads.
 
 Reliable (85% or more read): shva, qamats, patah, hiriq, holam, segol, dagesh, hataf patah, shin
 and sin dots. Tsere and hataf segol are read most of the time. Weak: qamats qatan (in most fonts the
@@ -169,7 +200,7 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 
 ## Changes
 
-- **2.0** (2026-11-13): both models retrained with real old-print lines and much more vowelled text. Old print and niqqud are far better (see Results); modern documents are about the same. New characters: hataf vowels, qubuts, qamats qatan, meteg, rafe (and, in the lite model, tsere, holam and the shin/sin dots). The float `heb_rivok` is now offered for recognition too. Known regression: two of the seven example documents lose a few characters (Examples).
+- **2.0** (2026-11-13): both models retrained with real old-print lines and much more vowelled text. Old print and niqqud are far better (`heb_rivok` 1.0 → 2.0, int8: four old books 8.1% → 2.7%, HaZefira lines 9.9% → 4.8%, Selichot vowel marks read 50% → 82%); modern documents are about the same. New characters: hataf vowels, qubuts, qamats qatan, meteg, rafe (and, in the lite model, tsere, holam and the shin/sin dots). The float `heb_rivok` is now offered for recognition too. Known regression: two of the seven example documents lose a few characters (Examples).
 - **1.0.1** (2026-11-07): `heb_rivok` lays pages out right to left, so pages with columns come out in the right order (see Limits). Only its character list changed.
 - **1.0** (2026-11-07): first release.
 

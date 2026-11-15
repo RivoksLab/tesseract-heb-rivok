@@ -19,7 +19,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 
 #: Model name -> (model version, SHA-256 of the shipped integer ("fast") file).
 MODELS = {
