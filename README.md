@@ -1,5 +1,6 @@
 ---
 license: apache-2.0
+pipeline_tag: image-to-text
 language:
   - he
   - en
