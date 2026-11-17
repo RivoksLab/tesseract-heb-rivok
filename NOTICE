@@ -19,7 +19,10 @@ Version 2.0 was also trained on:
 - Miqra according to the Masorah (Hebrew Wikisource, CC BY-SA 4.0,
   https://en.wikisource.org/wiki/User:Dovi/Miqra_according_to_the_Masorah);
 - the Mishnah (Torat Emet, public domain) and Project Ben-Yehuda texts (public domain);
-- modern Hebrew text vowelled with dicta-il/dictabert-large-char-menaked (CC BY 4.0, Dicta).
+- modern Hebrew text from Hebrew Wikipedia (CC BY-SA 4.0, Hebrew Wikipedia contributors), vowelled
+  with dicta-il/dictabert-large-char-menaked (CC BY 4.0, Dicta).
+
+The exact documents and source files are listed in training/v2/.
 
 The example pages in examples/ use public-domain scans from Wikimedia Commons (National Library
 of Israel) with reference text from Hebrew Wikisource (CC BY-SA 4.0). Examples are generated

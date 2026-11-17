@@ -194,10 +194,10 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 ## How they were trained
 
 - **Fine-tuning only.** Tesseract's `lstmtraining` continued training the 1.0 models (themselves fine-tuned from Google's) at learning rate 1e-4, on a CPU: about 4.5 hours for `heb_rivok` and 2 hours for the lite model. The released files are averages of the weights of the last training checkpoints, chosen on held-out development pages.
-- **Real lines (new in 2.0):** about 24,600 printed lines from public-domain Hebrew books of the 19th and early 20th century (scans on Wikimedia Commons, validated Hebrew Wikisource transcriptions), cleaned of modernised spellings. The test books were kept out.
+- **Real lines (new in 2.0):** about 24,600 printed lines from public-domain Hebrew books of the 19th and early 20th century (scans on Wikimedia Commons, proofread Hebrew Wikisource transcriptions), cleaned of modernised spellings. The test books were kept out.
 - **Synthetic lines:** modern documents, Hebrew with English (for `heb_rivok`), vowelled text (Tanakh, Mishnah, Project Ben-Yehuda, and modern text vowelled with Dicta's model), look-alike letters, signs and document numbers, rendered in about 165 open fonts and damaged to look scanned, faxed, faded or photographed.
 - **Character list:** 2.0 adds hataf vowels, qubuts, qamats qatan, meteg and rafe; the lite model also gains tsere, holam and the shin/sin dots it lacked.
-- **Want the details?** This is a summary; the full 1.0 recipe is in `training/`. For more on 2.0's data and training, write to us: ronen@rivoklabs.com.
+- **Want the details?** This is a summary; the full 1.0 recipe is in `training/`. Every document and source file 2.0 was trained on is listed in `training/v2/`, with a script that downloads them all. For more, write to us: ronen@rivoklabs.com.
 
 ## Changes
 
@@ -209,7 +209,7 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 
 - **Licence:** Apache-2.0, the same as the models they are built on.
 - **Based on:** Google's tessdata_best `script/Hebrew` and `heb`, and the langdata_lstm training text, all Apache-2.0 (see `NOTICE`).
-- **Training text and images (2.0):** Hebrew Wikisource transcriptions (CC BY-SA 4.0) of public-domain scans on Wikimedia Commons; Miqra according to the Masorah (Hebrew Wikisource, CC BY-SA 4.0); Mishnah (Torat Emet, public domain); Project Ben-Yehuda (public domain); dicta-il/dictabert-large-char-menaked (CC BY 4.0), used to vowel modern text.
+- **Training text and images (2.0):** Hebrew Wikisource transcriptions (CC BY-SA 4.0) of public-domain scans on Wikimedia Commons; Miqra according to the Masorah (Hebrew Wikisource, CC BY-SA 4.0); Mishnah (Torat Emet, public domain); Project Ben-Yehuda (public domain); Hebrew Wikipedia (CC BY-SA 4.0), modern text vowelled with dicta-il/dictabert-large-char-menaked (CC BY 4.0). Full list: `training/v2/`.
 - **Fonts:** used only to render training images (Google Fonts and SIL, OFL-1.1; Culmus, GPL-2.0 with font exception); no font is distributed here.
 - **Made by:** Rivok Labs. Contact: ronen@rivoklabs.com
 - **Credit:** If you use it, a credit or a link back to this repository is appreciated.
