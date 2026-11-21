@@ -179,6 +179,10 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
   - This is Tesseract's code (`ResultIterator::CurrentParagraphIsLtr`), not the model, and stock models do the same. Reported upstream as [tesseract-ocr/tesseract#4680](https://github.com/tesseract-ocr/tesseract/issues/4680); `examples/direction/` reproduces it.
   - On the 209 real mixed lines, nearly all of `heb_rivok` 2.0's 14.3% is word order: counting characters regardless of order, 1.7%.
   - Long paragraphs are not affected.
+- **To fix the word order and keep Tesseract: [ocrmypdf-hebrew](https://github.com/RivoksLab/ocrmypdf-hebrew)** (`pip install ocrmypdf-hebrew`).
+  - With OCRmyPDF: `ocrmypdf --hebrew-tess-order -l heb_rivok scanned.pdf searchable.pdf` puts the words of mixed lines back in Hebrew reading order.
+  - Without OCRmyPDF, the `hebrew-tess-order` command does the same to Tesseract's TSV or hOCR: `tesseract page.png - -l heb_rivok tsv | hebrew-tess-order > page.txt`.
+  - On 20 synthetic pages with `heb_rivok` 1.0.1, OCRmyPDF's text output went from 10.8% to 2.7% character error.
 - **Many mixed lines? Try [paddleocr-hebrew](https://github.com/RivoksLab/paddleocr-hebrew).**
   - It is our deep-learning Hebrew OCR. It assembles each line in Hebrew reading order: 3.6% on the same 209 lines.
   - It is much slower on a CPU (about 55 s per page) and fast on an NVIDIA GPU. On old print `heb_rivok` 2.0 is now ahead (HaZefira lines: 4.8% against 9.9%).
