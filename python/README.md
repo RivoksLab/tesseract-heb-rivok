@@ -1,7 +1,7 @@
 # tesseract-heb-rivok
 
 [heb_rivok](https://github.com/RivoksLab/tesseract-heb-rivok) and heb_rivok_lite are
-Tesseract 5 models for printed Hebrew, fine-tuned by [Rivok Labs](https://rivoklabs.com).
+Tesseract 5 models for printed Hebrew, fine-tuned by [Rivok Labs](https://rivoklabs.com/?ref=pypi-tesseract).
 This package installs them with pip and tells Tesseract where they are. You still need
 Tesseract itself (`apt install tesseract-ocr`, `brew install tesseract`, or the Windows
 installer).

@@ -15,10 +15,10 @@ tags:
 
 # heb_rivok: better Hebrew models for Tesseract
 
-**[Article with examples](https://rivoklabs.com/research/tesseract-hebrew)** · [GitHub release](https://github.com/RivoksLab/tesseract-heb-rivok/releases/tag/v2.0) · [Hugging Face](https://huggingface.co/Rivok/tesseract-heb-rivok)
+**[Article with examples](https://rivoklabs.com/research/tesseract-hebrew?ref=readme-tesseract)** · [GitHub release](https://github.com/RivoksLab/tesseract-heb-rivok/releases/tag/v2.0) · [Hugging Face](https://huggingface.co/Rivok/tesseract-heb-rivok)
 
 Two drop-in Tesseract 5 models for printed Hebrew, fine-tuned by
-[Rivok Labs](https://rivoklabs.com) from Google's own Hebrew models:
+[Rivok Labs](https://rivoklabs.com/?ref=readme-tesseract) from Google's own Hebrew models:
 
 - **`heb_rivok`**: Hebrew, English and digits in one model, with niqqud. Fine-tuned from Google's
   `script/Hebrew` (tessdata_best). The more accurate of the two; start here.
@@ -154,7 +154,7 @@ differently from modern Hebrew.
 ## Examples
 
 See them line by line, with errors marked, in the
-[article](https://rivoklabs.com/research/tesseract-hebrew#examples); `examples/` regenerates them:
+[article](https://rivoklabs.com/research/tesseract-hebrew?ref=readme-tesseract#examples); `examples/` regenerates them:
 whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 
 | page | Ubuntu `heb` | heb_rivok 1.0 | heb_rivok 2.0 |
