@@ -17,7 +17,7 @@ Then the Seder Tefilot pages are split as in training: whole pages, shuffled wit
 out until they hold >= 300 lines (the vowelled dev set); the rest is the training pool.
 
 Outputs in OUT: pages/BOOK/pNNNN.png, hocr/BOOK/pNNNN.hocr (if OCR was run), align/BOOK/pNNNN.json,
-pool/BOOK/pNNNN_lNNN.png + .gt.txt, pool.tsv (book, page, line, label, in the training order: row i
+pool/BOOK/pNNNN/pNNNN_lNNN.png + .gt.txt, pool.tsv (book, page, line, label, in the training order: row i
 is r{i:06d} in the training lists), dev_tefilot.tsv, dropped.tsv (line and reason).
 
     python3 -I build_lines.py OUT --books V2_SOURCES/books --page-text DATASET/pages \\
@@ -194,7 +194,7 @@ def main():
     for book, n, r, label in pool:
         by_page[(book, n)].append(dict(r, gt=label))
     for (book, n), rs in by_page.items():
-        A.crop_lines(a.out / "pages" / book / f"p{n:04d}.png", rs, a.out / "pool" / book, f"p{n:04d}")
+        A.crop_lines(a.out / "pages" / book / f"p{n:04d}.png", rs, a.out / "pool" / book / f"p{n:04d}", f"p{n:04d}")
     for name, rs in (("pool.tsv", pool), ("dev_tefilot.tsv", dev)):
         with open(a.out / name, "w", encoding="utf-8") as fh:
             for book, n, r, label in rs:
