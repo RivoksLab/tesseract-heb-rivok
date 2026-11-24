@@ -17,7 +17,8 @@ manifest.
 
 Wiki API calls are batched (50 per request), sent one at a time, one second apart, with maxlag.
 Some differences from our run are expected and reported, not fatal: a file that changed at its
-source (for example a branch URL), and the one font whose original download was not recorded.
+source (for example a branch URL). Three Noto font files whose download was not recorded are not
+fetched: the line dataset carries them (fonts/, OFL-1.1).
 """
 import argparse
 import csv
@@ -168,6 +169,8 @@ def fonts(out):
             elif digest(path, "sha256") != f["sha256"]:
                 problems.append(f"{f['file']}: installed version differs from ours ({pkg})")
             continue
+        if src.startswith("dataset:"):                          # our copy is in the line dataset (fonts/)
+            continue
         if ": http" in src:                                     # a file inside an archive (Culmus, Ezra SIL)
             name, url = src.split(": ", 1)
             if url not in archives:
@@ -179,6 +182,8 @@ def fonts(out):
         download(src, out / "fonts" / f["file"], "sha256", f["sha256"])
     if archives:
         print("Culmus and Ezra SIL: unpack the archives in fonts/archives; fonts.tsv has each file's sha256.")
+    print("Three Noto files whose download was not recorded are in the line dataset (fonts/);"
+          " synth/collect_fonts.py gathers everything into one folder.")
 
 
 def main():

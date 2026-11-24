@@ -201,7 +201,8 @@ whole pages read by Ubuntu's `heb` and by `heb_rivok`, default settings.
 - **Real lines (new in 2.0):** 15,663 printed lines for `heb_rivok` and 14,291 for `heb_rivok_lite`, drawn from a pool of about 24,600 lines from public-domain Hebrew books of the 19th and early 20th century (scans on Wikimedia Commons, proofread Hebrew Wikisource transcriptions), cleaned of modernised spellings. The test books were kept out.
 - **Synthetic lines:** modern documents, Hebrew with English (for `heb_rivok`), vowelled text (Tanakh, Mishnah, Project Ben-Yehuda, and modern text vowelled with Dicta's model), look-alike letters, signs and document numbers, rendered in about 165 open fonts and damaged to look scanned, faxed, faded or photographed.
 - **Character list:** 2.0 adds hataf vowels, qubuts, qamats qatan, meteg and rafe; the lite model also gains tsere, holam and the shin/sin dots it lacked.
-- **Want the details?** This is a summary; the full 1.0 recipe is in `training/`. Every document and source file 2.0 was trained on is listed in `training/v2/`, with a script that downloads them all. For more, write to us: ronen@rivoklabs.com.
+- **Dictionary:** both models keep Tesseract's word, punctuation and number lists, built from langdata_lstm as in 1.0: for `heb_rivok`, the Hebrew word list plus the 150,000 most frequent English words; for the lite model, the Hebrew lists. 2.0 adds only the words that carry its new marks.
+- **Want the details?** Everything 2.0 was trained on is public. `training/v2/` lists every document and source file, with a script that downloads them, and `train_v2.sh` repeats the training step by step. The lines, training lists and checkpoints are in the dataset [Rivok/tesseract-heb-rivok-v2-lines](https://huggingface.co/datasets/Rivok/tesseract-heb-rivok-v2-lines); from them, the released files rebuild byte for byte. The 1.0 recipe is in `training/`.
 
 ## Changes
 

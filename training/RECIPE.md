@@ -2,8 +2,9 @@
 
 **This is the recipe for 1.0 / 1.0.1.** Version 2.0 continued training from these models with real
 old-print lines (public-domain books, Hebrew Wikisource transcriptions) and much more vowelled text;
-the model card ("How they were trained") describes it. Every document and source file 2.0 was
-trained on is listed in `v2/`, with a script that downloads them all.
+the model card ("How they were trained") describes it. The 2.0 recipe is in `v2/`: every document
+and source file it used, the code, and `v2/train_v2.sh`, which repeats the training step by step
+(`v2/README.md`).
 
 How `heb_rivok` and `heb_rivok_lite` were made, with the commands to make them again. Both
 are fine-tunes of Google's tessdata_best models on synthetic text lines; nothing is trained
