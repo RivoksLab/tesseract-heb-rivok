@@ -10,7 +10,7 @@ training text and word lists, and the fonts of 1.0) are listed in `../RECIPE.md`
 ```bash
 # the released files, from our snapshots (minutes)
 WORK=work DATASET=dataset bash train_v2.sh ours release
-# the whole training, from the 1.0 models (about 7 hours on 4 CPU cores); see train_v2.sh for the inputs
+# the whole training, from the 1.0 models (about 8 hours on 4 CPU cores); see train_v2.sh for the inputs
 WORK=work DATASET=dataset bash train_v2.sh
 # the source documents, from where they are published (~700 MB; --with-dicta adds Dicta's model, 1.2 GB)
 python3 fetch_v2_sources.py --out v2_sources
@@ -34,8 +34,11 @@ On 2026-11-23, with the published inputs and the code in this folder:
   exception: `heb_rivok`'s first stage was scored before the scorer started counting holam haser for
   vav (U+05BA) as holam, which it did from the second stage on. Three Tanakh dev lines carry that mark,
   so the first stage's logged Tanakh scores are 0.01-0.02 points higher than this scorer gives.
-- **What is not bit-exact:** `lstmtraining` itself. Retraining on another machine or with another number
-  of threads gives slightly different weights, which is why the dataset also has our snapshots.
+- **The whole training:** on 2026-11-24, `train_v2.sh` run from the 1.0 start models on the machine we
+  trained on (4 threads, 7 hours 48 minutes) gave every snapshot of the three runs and all four released
+  files byte for byte.
+- **What may differ:** `lstmtraining` on another machine or with another number of threads can give
+  slightly different weights, which is why the dataset also has our snapshots.
 
 ## Files
 
